@@ -25,7 +25,7 @@ application.run();
 
 ```html
 <div data-controller="search">
-  <div data-controller="result"></div>
+    <div data-controller="result"></div>
 </div>
 ```
 
@@ -34,16 +34,16 @@ import { Controller } from "refable";
 import Result from "./controllers/result.ts";
 
 export default class extends Controller {
-  declare readonly resultController: Result;
-  declare readonly resultControllers: Result[];
+    declare readonly resultController: Result;
+    declare readonly resultControllers: Result[];
 
-  connected() {
-    //
-  }
+    connected() {
+        //
+    }
 
-  disconnected() {
-    //
-  }
+    disconnected() {
+        //
+    }
 }
 ```
 
@@ -57,15 +57,15 @@ export default class extends Controller {
 import { Controller } from "refable";
 
 export default class extends Controller {
-  declare readonly someValue: string;
+    declare readonly someValue: string;
 
-  connected() {
-    console.log(this.someValue);
-  }
+    connected() {
+        console.log(this.someValue);
+    }
 
-  someValueChanged(value) {
-    //
-  }
+    someValueChanged(value) {
+        //
+    }
 }
 ```
 
@@ -73,7 +73,7 @@ export default class extends Controller {
 
 ```html
 <div data-controller="search">
-  <div data-target="result"></div>
+    <div data-target="result"></div>
 </div>
 ```
 
@@ -81,12 +81,12 @@ export default class extends Controller {
 import { Controller } from "refable";
 
 export default class extends Controller {
-  declare readonly resultTarget: Element;
-  declare readonly resultTargets: Element[];
+    declare readonly resultTarget: Element;
+    declare readonly resultTargets: Element[];
 
-  connected() {
-    console.log(this.resultTarget);
-  }
+    connected() {
+        console.log(this.resultTarget);
+    }
 }
 ```
 
@@ -94,7 +94,7 @@ export default class extends Controller {
 
 ```html
 <div data-controller="search">
-  <button data-action="click->find">Find</button>
+    <button data-action="click->find">Find</button>
 </div>
 ```
 
@@ -102,8 +102,8 @@ export default class extends Controller {
 import { Controller } from "refable";
 
 export default class extends Controller {
-  find() {
-    console.log("Button clicked!");
-  }
+    find() {
+        console.log("Button clicked!");
+    }
 }
 ```
