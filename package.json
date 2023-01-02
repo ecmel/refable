@@ -1,16 +1,22 @@
 {
   "name": "refable",
   "displayName": "Refable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Super simple JS framework.",
+  "keywords": [
+    "html",
+    "controller",
+    "target",
+    "action"
+  ],
   "main": "index.ts",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/ecmel/refable.git"
+    "type": "git",
+    "url": "https://github.com/ecmel/refable.git"
   },
   "author": {
-      "name": "Ecmel Ercan",
-      "url": "https://github.com/ecmel"
+    "name": "Ecmel Ercan",
+    "url": "https://github.com/ecmel"
   },
   "license": "MIT"
 }

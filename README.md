@@ -47,27 +47,6 @@ export default class extends Controller {
 }
 ```
 
-### Targets
-
-```html
-<div data-controller="search">
-  <div data-target="result"></div>
-</div>
-```
-
-```ts
-import { Controller } from "refable";
-
-export default class extends Controller {
-  declare readonly resultTarget: Element;
-  declare readonly resultTargets: Element[];
-
-  connected() {
-    console.log(this.resultTarget);
-  }
-}
-```
-
 ### Values
 
 ```html
@@ -86,6 +65,27 @@ export default class extends Controller {
 
   someValueChanged(value) {
     //
+  }
+}
+```
+
+### Targets
+
+```html
+<div data-controller="search">
+  <div data-target="result"></div>
+</div>
+```
+
+```ts
+import { Controller } from "refable";
+
+export default class extends Controller {
+  declare readonly resultTarget: Element;
+  declare readonly resultTargets: Element[];
+
+  connected() {
+    console.log(this.resultTarget);
   }
 }
 ```
