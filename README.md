@@ -10,11 +10,11 @@ npm install refable --save-dev
 
 ## Application
 
-Application is the main class for bootstrapping. Controllers can be registered on application instance. For registering glob of controllers please refer to your bundler's documentation.
+Application is the main class for bootstrapping. Controllers are registered on an application instance. For registering glob of controllers please refer to your bundler's documentation.
 
 ```ts
 import { Application } from "refable";
-import Search from "./controllers/search.ts";
+import Search from "./controllers/search";
 
 const application = new Application();
 
@@ -35,7 +35,7 @@ Controllers are instances of classes that you register in your application. Each
 
 ```ts
 import { Controller } from "refable";
-import Result from "./controllers/result.ts";
+import Result from "./controllers/result";
 
 export default class extends Controller {
     declare readonly resultController: Result;
@@ -91,7 +91,7 @@ export default class extends Controller {
 
 ## Targets
 
-Targets let you reference important elements by name within a controller.
+Targets map important elements to controller properties.
 
 ```html
 <div data-controller="search">

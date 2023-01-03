@@ -295,21 +295,23 @@ export class Application {
     }
 
     run() {
-        document
-            .querySelectorAll("[data-controller]")
-            .forEach((el) => this.#addController(el));
+        domReady().then(() => {
+            document
+                .querySelectorAll("[data-controller]")
+                .forEach((el) => this.#addController(el));
 
-        document
-            .querySelectorAll("[data-target]")
-            .forEach((el) => this.#addTarget(el));
+            document
+                .querySelectorAll("[data-target]")
+                .forEach((el) => this.#addTarget(el));
 
-        document
-            .querySelectorAll("[data-action]")
-            .forEach((el) => this.#addAction(el));
+            document
+                .querySelectorAll("[data-action]")
+                .forEach((el) => this.#addAction(el));
 
-        this.#observer.observe(document, {
-            childList: true,
-            subtree: true,
+            this.#observer.observe(document, {
+                childList: true,
+                subtree: true,
+            });
         });
     }
 }
@@ -349,4 +351,14 @@ interface Action {
     event: string;
     listener: EventListener;
     options: AddEventListenerOptions;
+}
+
+function domReady() {
+    return new Promise<void>((resolve) => {
+        if (document.readyState == "loading") {
+            document.addEventListener("DOMContentLoaded", () => resolve());
+        } else {
+            resolve();
+        }
+    });
 }
