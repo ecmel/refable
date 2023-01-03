@@ -122,8 +122,6 @@ export class Application {
             }
         }
 
-        queueMicrotask(() => controller.connected());
-
         if (parent) {
             const targets = `${id}Controllers`;
 
@@ -145,6 +143,8 @@ export class Application {
                 }
             });
         }
+
+        queueMicrotask(() => controller.connected());
     }
 
     #removeController(el: Element) {
