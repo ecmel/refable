@@ -1,14 +1,16 @@
-## Refable
+# Refable
 
-Super simple JS framework inspired by [Stimulus](https://stimulus.hotwired.dev/).
+Super simple JS framework inspired by [Stimulus](https://github.com/hotwired/stimulus).
 
-### Installation
+## Installation
 
 ```bash
 npm install refable --save-dev
 ```
 
-### Application
+## Application
+
+Application is the main class for bootstrapping. Controllers can be registered on application instance. For registering directory of components please refer to your bundler's documentation.
 
 ```ts
 import { Application } from "refable";
@@ -21,7 +23,9 @@ application.register("search", Search);
 application.run();
 ```
 
-### Controllers
+## Controllers
+
+Controllers are instances of classes that you define in your application. Each controller class inherits from the Controller base class. Controllers can be nested within controllers and can be referneced by name in parent controller.
 
 ```html
 <div data-controller="search">
@@ -44,10 +48,20 @@ export default class extends Controller {
     disconnected() {
         //
     }
+
+    resultControllerConnected(result: Result) {
+        //
+    }
+
+    resultControllerDisconnected(result: Result) {
+        //
+    }
 }
 ```
 
-### Values
+## Values
+
+Controllers are created for elements when inserted into DOM and deleted when removed so all state should be kept in values.
 
 ```html
 <div data-controller="search" data-some-value="1"></div>
@@ -59,17 +73,15 @@ import { Controller } from "refable";
 export default class extends Controller {
     declare readonly someValue: string;
 
-    connected() {
-        console.log(this.someValue);
-    }
-
     someValueChanged(value) {
         //
     }
 }
 ```
 
-### Targets
+## Targets
+
+Targets let you reference important elements by name within a controller.
 
 ```html
 <div data-controller="search">
@@ -84,13 +96,19 @@ export default class extends Controller {
     declare readonly resultTarget: Element;
     declare readonly resultTargets: Element[];
 
-    connected() {
-        console.log(this.resultTarget);
+    resultTargetConnected(el: Element) {
+        //
+    }
+
+    resultTargetDisconnected(el: Element) {
+        //
     }
 }
 ```
 
-### Actions
+## Actions
+
+Actions are for handling DOM events in controllers.
 
 ```html
 <div data-controller="search">
@@ -103,7 +121,25 @@ import { Controller } from "refable";
 
 export default class extends Controller {
     find() {
-        console.log("Button clicked!");
+        //
     }
 }
+```
+
+### Event Options
+
+You can append one or more action options to an action descriptor if you need to specify DOM event listener options.
+
+```html
+<button data-action="click->find[:option]">Find</button>
+```
+
+Following action options are supported:
+
+```
+:capture
+:once
+:passive
+:stop
+:prevent
 ```

@@ -239,7 +239,7 @@ export class Application {
         targets.forEach((target) => {
             const [event, listener] = target.split("->");
 
-            const params = event.split(":");
+            const params = listener.split(":");
             const options = {};
 
             if (params.length > 1) {
@@ -249,9 +249,19 @@ export class Application {
             }
 
             const action: Action = {
-                event: params[0],
-                listener: (e) => parent[listener](e),
+                event,
                 options,
+                listener: (event) => {
+                    if ("stop" in options) {
+                        event.stopPropagation();
+                    }
+
+                    if ("prevent" in options) {
+                        event.preventDefault();
+                    }
+
+                    parent[params[0]](event);
+                },
             };
 
             el.addEventListener(action.event, action.listener, action.options);
