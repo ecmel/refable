@@ -10,7 +10,7 @@ npm install refable --save-dev
 
 ## Application
 
-Application is the main class for bootstrapping. Controllers can be registered on application instance. For registering directory of components please refer to your bundler's documentation.
+Application is the main class for bootstrapping. Controllers can be registered on application instance. For registering glob of controllers please refer to your bundler's documentation.
 
 ```ts
 import { Application } from "refable";
@@ -25,7 +25,7 @@ application.run();
 
 ## Controllers
 
-Controllers are instances of classes that you define in your application. Each controller class inherits from the Controller base class. Controllers can be nested within controllers and can be referneced by name in parent controller.
+Controllers are instances of classes that you define in your application. Each controller class inherits from the Controller base class. Controllers can be nested within controllers and can be referenced by name in parent controller.
 
 ```html
 <div data-controller="search">
@@ -56,6 +56,16 @@ export default class extends Controller {
     resultControllerDisconnected(result: Result) {
         //
     }
+}
+```
+
+Controller classes are templated so more specific elements can be used if needed.
+
+```ts
+import { Controller } from "refable";
+
+export default class extends Controller<HTMLElement> {
+    //
 }
 ```
 
