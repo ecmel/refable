@@ -25,7 +25,7 @@ application.run();
 
 ## Controllers
 
-Controllers are instances of classes that you define in your application. Each controller class inherits from the Controller base class. Controllers can be nested within controllers and can be referenced by name in parent controller.
+Controllers are instances of classes that you register in your application. Each controller class inherits from the Controller base class. Controllers can be nested within controllers and can be referenced in the parent controller.
 
 ```html
 <div data-controller="search">
@@ -71,7 +71,7 @@ export default class extends Controller<HTMLElement> {
 
 ## Values
 
-Controllers are created for elements when inserted into DOM and deleted when removed so all state should be kept in values.
+Controllers are created for elements when inserted into DOM and deleted when removed so all long lived state should be kept in values.
 
 ```html
 <div data-controller="search" data-some-value="1"></div>
@@ -83,7 +83,7 @@ import { Controller } from "refable";
 export default class extends Controller {
     declare readonly someValue: string;
 
-    someValueChanged(value) {
+    someValueChanged(value: string) {
         //
     }
 }
@@ -138,7 +138,7 @@ export default class extends Controller {
 
 ### Event Options
 
-You can append one or more action options to an action descriptor if you need to specify DOM event listener options.
+You can append one or more action options to an action descriptor if you need to specify event listener options.
 
 ```html
 <button data-action="click->find[:option]">Find</button>
