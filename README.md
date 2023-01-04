@@ -156,7 +156,7 @@ Following action options are supported:
 
 ## Events
 
-The Controller class has a convenience method called dispatch that fires custom events. It takes an eventName as the first argument. The optional payload is held in second argument.
+The Controller class has a method called dispatch that fires custom events. It takes an event name and an optional payload as arguments.
 
 ```html
 <div data-controller="search">
@@ -174,4 +174,4 @@ export default class extends Controller {
 }
 ```
 
-The dispatched event can be catched with an action in a parent element and handled in a different controller.
+The dispatched event can be catched with an action in a parent element and handled in a different controller like an action. Optional payload is event parameter's detail property.
