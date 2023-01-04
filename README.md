@@ -136,7 +136,7 @@ export default class extends Controller {
 }
 ```
 
-### Event Options
+### Action Options
 
 You can append one or more action options to an action descriptor if you need to specify event listener options.
 
@@ -153,3 +153,25 @@ Following action options are supported:
 :stop
 :prevent
 ```
+
+## Events
+
+The Controller class has a convenience method called dispatch that fires custom events. It takes an eventName as the first argument. The optional payload is held in second argument.
+
+```html
+<div data-controller="search">
+    <button data-action="click->find">Find</button>
+</div>
+```
+
+```ts
+import { Controller } from "refable";
+
+export default class extends Controller {
+    find() {
+        this.dispatch("found", { result: "found" });
+    }
+}
+```
+
+The dispatched event can be catched with an action in a parent element and handled in a different controller.

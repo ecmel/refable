@@ -338,9 +338,15 @@ export class Controller<T extends Element = Element> {
     }
 
     dispatch(type: string, detail = {}) {
-        this.#element.dispatchEvent(
-            new CustomEvent(type, { detail, bubbles: true })
-        );
+        const event = new CustomEvent(type, {
+            detail,
+            bubbles: true,
+            cancelable: true,
+        });
+
+        this.#element.dispatchEvent(event);
+
+        return event;
     }
 
     connected() {}
