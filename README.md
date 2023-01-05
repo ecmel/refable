@@ -168,10 +168,10 @@ The Controller class has a method called dispatch that fires custom events. It t
 import { Controller } from "refable";
 
 export default class extends Controller {
-    find() {
+    find(event: Event) {
         this.dispatch("found", { result: "found" });
     }
 }
 ```
 
-The dispatched event can be catched with an action in a parent element and handled in a different controller like an action. Optional payload is event parameter's detail property.
+The dispatched event can be catched with an action in a parent element and handled in a different controller like an action. Optional payload is in event parameter's detail property.
