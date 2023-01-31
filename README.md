@@ -189,7 +189,7 @@ The dispatched event can be catched with an action in a parent element and handl
             import {
                 Application,
                 Controller,
-            } from "https://cdn.jsdelivr.net/npm/refable@0.0.9/index.min.js";
+            } from "https://cdn.jsdelivr.net/npm/refable@0.0.9/+esm";
 
             class Home extends Controller {
                 connected() {
