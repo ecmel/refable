@@ -175,3 +175,33 @@ export default class extends Controller {
 ```
 
 The dispatched event can be catched with an action in a parent element and handled in a different controller like an action. Optional payload is in event parameter's detail property.
+
+## Plain JS Example
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body data-controller="home">
+        <script type="module">
+            import {
+                Application,
+                Controller,
+            } from "https://cdn.jsdelivr.net/npm/refable@0.0.9/index.min.js";
+
+            class Home extends Controller {
+                connected() {
+                    console.log("Connected");
+                }
+            }
+
+            const application = new Application();
+
+            application.register("home", Home);
+            application.run();
+        </script>
+    </body>
+</html>
+```
