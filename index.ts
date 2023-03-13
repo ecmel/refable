@@ -15,8 +15,8 @@ export class Application {
 
     #mutated(mutations: MutationRecord[]) {
         mutations.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => this.#addNode(node));
             mutation.removedNodes.forEach((node) => this.#removeNode(node));
+            mutation.addedNodes.forEach((node) => this.#addNode(node));
         });
     }
 
