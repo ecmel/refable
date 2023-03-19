@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refable</title>
+  </head>
+  <body>
+    <div data-controller="page">
+      <button type="button" data-action="click->add">Add</button>
+      <ul data-controller="parent"></ul>
+
+      <template data-target="childTemplate">
+        <li data-controller="child">
+          <button type="button" data-action="click->remove">Remove</button>
+        </li>
+      </template>
+    </div>
+
+    <script src="refable.js"></script>
+    <script>
+      const app = new refable.Application();
+
+      class Page extends refable.Controller {
+        created() {
+          console.log("Created: Page " + this.parent);
+        }
+
+        connected() {
+          console.log("Connected: Page");
+        }
+
+        add() {
+          const clone = this.childTemplateTarget.content.cloneNode(true);
+          this.parentController.add(clone);
+        }
+      }
+
+      class Parent extends refable.Controller {
+        created() {
+          console.log("Created: Parent" + this.parent);
+        }
+
+        connected() {
+          console.log("Connected: Parent");
+        }
+
+        add(child) {
+          this.element.appendChild(child);
+        }
+      }
+
+      class Child extends refable.Controller {
+        remove() {
+          this.element.remove();
+        }
+      }
+
+      app.register("page", Page);
+      app.register("parent", Parent);
+      app.register("child", Child);
+      app.run();
+    </script>
+  </body>
+</html>

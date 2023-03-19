@@ -1,5 +1,6 @@
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
+import copy from "rollup-plugin-copy";
 
 export default {
   input: "refable.ts",
@@ -21,5 +22,16 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [typescript(), terser()],
+  plugins: [
+    typescript(),
+    terser(),
+    copy({
+      targets: [
+        {
+          src: ["dist/refable.js", "dist/refable.js.map"],
+          dest: "docs",
+        },
+      ],
+    }),
+  ],
 };
