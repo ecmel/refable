@@ -1,7 +1,7 @@
 {
   "name": "refable",
   "displayName": "Refable",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "description": "Super simple JS framework.",
   "keywords": [
     "html",
@@ -21,15 +21,9 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    "default": "./dist/refable.mjs",
-    "require": "./dist/refable.cjs",
-    "import": "./dist/refable.mjs",
-    "node": "./dist/refable.mjs",
-    "types": "./dist/refable.d.ts"
-  },
   "main": "./dist/refable.cjs",
   "module": "./dist/refable.mjs",
+  "types": "./dist/refable.d.ts",
   "scripts": {
     "clean": "git clean -Xdf",
     "format": "prettier --ignore-path .gitignore --write .",

@@ -2,7 +2,7 @@ import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 
 export default {
-  input: "index.ts",
+  input: "refable.ts",
   output: [
     {
       file: "dist/refable.js",
