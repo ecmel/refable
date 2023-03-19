@@ -2,7 +2,7 @@ export type Class<T> = new (...args: any[]) => T;
 
 export class Application {
   #ctors = new Map<string, Class<Controller>>();
-  #controllers = new Map<Element, Controller>();
+  #controllers = new WeakMap<Element, Controller>();
   #targets = new Map<Element, Controller>();
   #actions = new Map<Element, Action[]>();
   #observer: MutationObserver;
@@ -86,10 +86,20 @@ export class Application {
     }
 
     const id = el.getAttribute("data-controller");
-    const ctor = this.#ctors.get(id);
-    const controller = new ctor(el, parent);
 
-    this.#controllers.set(el, controller);
+    let controller = this.#controllers.get(el);
+
+    if (!controller) {
+      const ctor = this.#ctors.get(id);
+      controller = new ctor(el, this);
+      controller.parent = parent;
+
+      this.#controllers.set(el, controller);
+
+      queueMicrotask(() => controller.created());
+    } else {
+      controller.parent = parent;
+    }
 
     if ("dataset" in el) {
       for (const key in el.dataset as DOMStringMap) {
@@ -166,8 +176,6 @@ export class Application {
         }
       });
     }
-
-    this.#controllers.delete(el);
 
     queueMicrotask(() => controller.disconnected());
   }
@@ -286,8 +294,16 @@ export class Application {
     this.#ctors.set(id, ctor);
   }
 
+  ready(resolve: Function) {
+    if (document.readyState == "loading") {
+      document.addEventListener("DOMContentLoaded", () => resolve());
+    } else {
+      resolve();
+    }
+  }
+
   run() {
-    domReady().then(() => {
+    this.ready(() => {
       document
         .querySelectorAll("[data-controller]")
         .forEach((el) => this.#addController(el));
@@ -311,18 +327,27 @@ export class Application {
 export class Controller<T extends Element = Element> {
   #element: T;
   #parent: Controller;
+  #application: Application;
 
-  constructor(element: T, parent: Controller) {
+  constructor(element: T, application: Application) {
     this.#element = element;
-    this.#parent = parent;
+    this.#application = application;
   }
 
   get element() {
     return this.#element;
   }
 
+  get application() {
+    return this.#application;
+  }
+
   get parent() {
     return this.#parent;
+  }
+
+  set parent(parent: Controller) {
+    this.#parent = parent;
   }
 
   nextTick(callback: () => void): void {
@@ -341,6 +366,7 @@ export class Controller<T extends Element = Element> {
     return event;
   }
 
+  created() {}
   connected() {}
   disconnected() {}
 }
@@ -349,14 +375,4 @@ interface Action {
   event: string;
   listener: EventListener;
   options: AddEventListenerOptions;
-}
-
-function domReady() {
-  return new Promise<void>((resolve) => {
-    if (document.readyState == "loading") {
-      document.addEventListener("DOMContentLoaded", () => resolve());
-    } else {
-      resolve();
-    }
-  });
 }

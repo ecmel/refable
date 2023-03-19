@@ -41,6 +41,10 @@ export default class extends Controller {
   declare readonly resultController: Result;
   declare readonly resultControllers: Result[];
 
+  created() {
+    //
+  }
+
   connected() {
     //
   }
@@ -70,8 +74,6 @@ export default class extends Controller<HTMLElement> {
 ```
 
 ## Values
-
-Controllers are created for elements when inserted into DOM and deleted when removed so all long lived state should be kept in values.
 
 ```html
 <div data-controller="search" data-some-value="1"></div>
