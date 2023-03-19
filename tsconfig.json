@@ -1,8 +1,10 @@
 {
-    "compilerOptions": {
-        "module": "es6",
-        "target": "es6",
-        "declaration": true
-    },
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "outDir": "./",
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "nodenext",
+    "declaration": true
+  },
+  "exclude": ["node_modules"]
 }

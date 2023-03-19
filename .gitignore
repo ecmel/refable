@@ -1,4 +1,4 @@
+.DS_Store
+dist/
+node_modules/
 *.tgz
-index.js
-index.d.ts
-node_modules

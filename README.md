@@ -29,7 +29,7 @@ Controllers are instances of classes that you register in your application. Each
 
 ```html
 <div data-controller="search">
-    <div data-controller="result"></div>
+  <div data-controller="result"></div>
 </div>
 ```
 
@@ -38,24 +38,24 @@ import { Controller } from "refable";
 import Result from "./controllers/result";
 
 export default class extends Controller {
-    declare readonly resultController: Result;
-    declare readonly resultControllers: Result[];
+  declare readonly resultController: Result;
+  declare readonly resultControllers: Result[];
 
-    connected() {
-        //
-    }
+  connected() {
+    //
+  }
 
-    disconnected() {
-        //
-    }
+  disconnected() {
+    //
+  }
 
-    resultControllerConnected(result: Result) {
-        //
-    }
+  resultControllerConnected(result: Result) {
+    //
+  }
 
-    resultControllerDisconnected(result: Result) {
-        //
-    }
+  resultControllerDisconnected(result: Result) {
+    //
+  }
 }
 ```
 
@@ -65,7 +65,7 @@ Controller classes are templated so more specific elements can be used if needed
 import { Controller } from "refable";
 
 export default class extends Controller<HTMLElement> {
-    //
+  //
 }
 ```
 
@@ -81,11 +81,11 @@ Controllers are created for elements when inserted into DOM and deleted when rem
 import { Controller } from "refable";
 
 export default class extends Controller {
-    declare readonly someValue: string;
+  declare readonly someValue: string;
 
-    someValueChanged(value: string) {
-        //
-    }
+  someValueChanged(value: string) {
+    //
+  }
 }
 ```
 
@@ -95,7 +95,7 @@ Targets map important elements to controller properties.
 
 ```html
 <div data-controller="search">
-    <div data-target="result"></div>
+  <div data-target="result"></div>
 </div>
 ```
 
@@ -103,16 +103,16 @@ Targets map important elements to controller properties.
 import { Controller } from "refable";
 
 export default class extends Controller {
-    declare readonly resultTarget: Element;
-    declare readonly resultTargets: Element[];
+  declare readonly resultTarget: Element;
+  declare readonly resultTargets: Element[];
 
-    resultTargetConnected(el: Element) {
-        //
-    }
+  resultTargetConnected(el: Element) {
+    //
+  }
 
-    resultTargetDisconnected(el: Element) {
-        //
-    }
+  resultTargetDisconnected(el: Element) {
+    //
+  }
 }
 ```
 
@@ -122,7 +122,7 @@ Actions are for handling DOM events in controllers.
 
 ```html
 <div data-controller="search">
-    <button data-action="click->find">Find</button>
+  <button data-action="click->find">Find</button>
 </div>
 ```
 
@@ -130,9 +130,9 @@ Actions are for handling DOM events in controllers.
 import { Controller } from "refable";
 
 export default class extends Controller {
-    find() {
-        //
-    }
+  find() {
+    //
+  }
 }
 ```
 
@@ -160,7 +160,7 @@ The Controller class has a method called dispatch that fires custom events. It t
 
 ```html
 <div data-controller="search">
-    <button data-action="click->find">Find</button>
+  <button data-action="click->find">Find</button>
 </div>
 ```
 
@@ -168,9 +168,9 @@ The Controller class has a method called dispatch that fires custom events. It t
 import { Controller } from "refable";
 
 export default class extends Controller {
-    find(event: Event) {
-        this.dispatch("found", { result: "found" });
-    }
+  find(event: Event) {
+    this.dispatch("found", { result: "found" });
+  }
 }
 ```
 
@@ -181,27 +181,27 @@ The dispatched event can be catched with an action in a parent element and handl
 ```html
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-    </head>
-    <body data-controller="home">
-        <script type="module">
-            import {
-                Application,
-                Controller,
-            } from "https://cdn.jsdelivr.net/npm/refable@0.0.9/+esm";
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body data-controller="home">
+    <script type="module">
+      import {
+        Application,
+        Controller,
+      } from "https://cdn.jsdelivr.net/npm/refable@0.0.9/+esm";
 
-            class Home extends Controller {
-                connected() {
-                    console.log("Connected");
-                }
-            }
+      class Home extends Controller {
+        connected() {
+          console.log("Connected");
+        }
+      }
 
-            const application = new Application();
+      const application = new Application();
 
-            application.register("home", Home);
-            application.run();
-        </script>
-    </body>
+      application.register("home", Home);
+      application.run();
+    </script>
+  </body>
 </html>
 ```
