@@ -1,7 +1,7 @@
 {
   "name": "refable",
   "displayName": "Refable",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Super simple JS framework.",
   "keywords": [
     "html",
@@ -34,7 +34,6 @@
     "@rollup/plugin-typescript": "^11.0.0",
     "prettier": "^2.8.4",
     "rollup": "^3.19.1",
-    "rollup-plugin-copy": "^3.4.0",
     "tslib": "^2.5.0"
   }
 }
