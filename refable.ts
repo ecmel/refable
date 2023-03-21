@@ -6,6 +6,11 @@ export class Application {
   private targets = new Map<Element, Controller>();
   private actions = new Map<Element, Action[]>();
   private observer: MutationObserver;
+  private _standalone = false;
+
+  get standalone() {
+    return this._standalone;
+  }
 
   constructor() {
     this.observer = new MutationObserver((mutations) =>
@@ -320,6 +325,10 @@ export class Application {
         childList: true,
         subtree: true,
       });
+
+      this._standalone =
+        window.navigator["standalone"] === true ||
+        window.matchMedia("(display-mode: standalone)").matches;
     });
   }
 }
