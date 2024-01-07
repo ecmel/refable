@@ -98,9 +98,7 @@ export class Application {
       const ctor = this.ctors.get(id);
       controller = new ctor(el, this);
       controller.parent = parent;
-
       this.controllers.set(el, controller);
-
       queueMicrotask(() => controller.created());
     } else {
       controller.parent = parent;
