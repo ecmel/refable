@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 1986-2023 Ecmel Ercan <ecmel.ercan@gmail.com>
+ * Licensed under the MIT License
+ */
+
 export type Class<T> = new (...args: any[]) => T;
 
 export class Application {
